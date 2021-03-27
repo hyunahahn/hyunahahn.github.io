@@ -619,7 +619,7 @@ Back to Table of Contents
 </div>
 <div id="seperating-a-column-using-separate" class="section level2">
 <h2><span class="header-section-number">3.2</span> Seperating a column using <code>separate()</code></h2>
-<p>Now, you understand what a long form of data means. The next step is to separate keywords and numbers in the second column such as Intelligence_1 and Ethics_3. The keywords indicate the traits we are interested in, and the numbers indicate 1: Your trait, 2: Your preference for your partner’s trait. and 3: The importance of a trait. I have intentionally used such columns names for easy separation of the keywords and the numbers. The code below includes the part where wide data was shaped long and moves onto the next line that separates the keywords and numbers. <code>separate(variables, c(&quot;category&quot;, &quot;Qnum&quot;))</code> means that the column ‘variables’ will be separated into two columns ‘category’ and ‘Qnum.’ The keywords will be placed in the category column and the suffixes will be placed in the ‘Qnum’ column.</p>
+<p>Now, you understand what a long form of data means. The next step is to separate keywords and numbers in the second column such as Intelligence_1 and Ethics_3. The keywords indicate the traits we are interested in, and the numbers indicate 1: Your trait, 2: Your preference for your partner’s trait. and 3: The importance of a trait. I have intentionally used such columns names for easy separation of the keywords and the numbers. The code below includes the part where wide data was shaped long and moves onto the next line that separates the keywords and numbers. <code>separate(questions, c(&quot;category&quot;, &quot;Qnum&quot;))</code> means that the column <code>questions</code> will be separated into two columns <code>category</code> and <code>Qnum</code>. The keywords will be placed in the category column and the suffixes will be placed in the ‘Qnum’ column.</p>
 <pre class="r"><code>data0&lt;-data0%&gt;%
   separate(questions, c(&quot;category&quot;, &quot;Qnum&quot;))</code></pre>
 <p>The <code>%&gt;%</code> symbol is called a ‘pipe,’ and it links one code to the next. This way, you don’t have to create a new data frame every time you make a change in your data frame. Now, let’s take a look at how the column is now separated.</p>
@@ -674,8 +674,8 @@ Back to Table of Contents
 ## 13 Boar       Ethics    1         3     NA
 ## 14 Boar       Ethics    2         3     NA
 ## 15 Boar       Ethics    3         4     50</code></pre>
-<p>For every row that has a question about the importance of a trait and a response to it, the weight of the trait in the exponential scale is listed.</p>
-<p>The next step is to turn the continuous values in the <code>Qnum</code> column into categorical values because we do not want R to process the numbers in the Qnum column as ordinal or interval values. We can again use the <code>mutate()</code> and <code>case_when()</code> functions to do that. Also, adding in <code>select(-Qnum)</code> at the end of the codes will delete the unwanted, redundant column.</p>
+<p>For every row that has a question about the importance of a trait and a response to it, the weight of the trait in the exponential scale is listed in the <code>weight</code> column.</p>
+<p>The next step is to turn the continuous values in the <code>Qnum</code> column into categorical values because we do not want R to process the numbers in the Qnum column as ordinal or interval values. We can again use the <code>mutate()</code> and <code>case_when()</code> functions to do that. Also, adding in <code>select(-Qnum)</code> at the end of the codes will delete the now unwanted, redundant column (<code>Qnum</code>).</p>
 <pre class="r"><code>data0&lt;-data0%&gt;%
   mutate(number = case_when(
     Qnum ==1 ~&quot;q1&quot;,
