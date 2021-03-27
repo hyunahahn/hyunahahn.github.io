@@ -1039,6 +1039,7 @@ Back to Table of Contents
     Qnum ==2 ~&quot;q2&quot;,
     Qnum ==3 ~&quot;q3&quot;
   ))%&gt;%
+  select(-Qnum)%&gt;%
   group_by(Name, category)%&gt;%
   fill(weight, .direction = &quot;up&quot;)%&gt;%
   spread(number, responses)%&gt;%
@@ -1048,7 +1049,8 @@ data1&lt;-data0%&gt;%
   select(Name, category, q1)%&gt;%
   rename(partner=Name, partner_resp=q1)
 
-data2&lt;-merge(data0, data1, by=c(&quot;category&quot;))%&gt;%
+data2&lt;-inner_join(data0, data1, by=&quot;category&quot;)%&gt;%
+  filter(Name != partner)%&gt;%
   mutate(weighted_partner_score = if_else(partner_resp &gt; q2, c(q2*weight), c(partner_resp*weight)))%&gt;%
   mutate(weighted_partner_score = replace_na(weighted_partner_score, 100))%&gt;%
   mutate(comp_score = (weighted_partner_score/weight2)*100)%&gt;%
