@@ -617,8 +617,8 @@ Back to Table of Contents
 Back to Table of Contents
 </button>
 </div>
-<div id="seperating-a-column-using-spread" class="section level2">
-<h2><span class="header-section-number">3.2</span> Seperating a column using <code>spread()</code></h2>
+<div id="seperating-a-column-using-separate" class="section level2">
+<h2><span class="header-section-number">3.2</span> Seperating a column using <code>separate()</code></h2>
 <p>Now, you understand what a long form of data means. The next step is to separate keywords and numbers in the second column such as Intelligence_1 and Ethics_3. The keywords indicate the traits we are interested in, and the numbers indicate 1: Your trait, 2: Your preference for your partner’s trait. and 3: The importance of a trait. I have intentionally used such columns names for easy separation of the keywords and the numbers. The code below includes the part where wide data was shaped long and moves onto the next line that separates the keywords and numbers. <code>separate(variables, c(&quot;category&quot;, &quot;Qnum&quot;))</code> means that the column ‘variables’ will be separated into two columns ‘category’ and ‘Qnum.’ The keywords will be placed in the category column and the suffixes will be placed in the ‘Qnum’ column.</p>
 <pre class="r"><code>data0&lt;-data0%&gt;%
   separate(questions, c(&quot;category&quot;, &quot;Qnum&quot;))</code></pre>
