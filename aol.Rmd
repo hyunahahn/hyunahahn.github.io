@@ -1,0 +1,82 @@
+---
+title: "Algorithm of Love"
+author: "Hyunah Ahn"
+date: "3/27/2021"
+output:
+  html_document: 
+    df_print: default
+    toc: yes
+    number_sections: yes
+    keep_md: yes
+  pdf_document: default
+---
+
+```{r directory}
+# Windows
+# setwd("C:/Users/(UserName)/Desktop/aol") 
+
+# Mac
+# setwd("/Users/(UserName)/Desktop/aol")
+
+# A hashtag (#) works as a sign for R to ignore whatever's after it. To execute either setwd command above, simply remove the hashtag in the begining of the line. But be sure to delete the hash tag only in one of the two lines. If you're a Windows user, delete the hash tag before the Windows command. If you're a Mac user, the one before the Mac command. 
+```
+
+```{r library}
+library(tidyverse)
+library(pracma)
+```
+
+```{r data}
+raw.data <- read.csv("sampleDat.csv")
+```
+
+```{r }
+data0<-raw.data%>%
+  gather(questions, responses, 2:16)%>%
+  separate(questions, c("category", "Qnum"))%>%
+  mutate(weight=case_when(
+    Qnum==3 & responses ==1~0,
+    Qnum==3 & responses ==2~1,
+    Qnum==3 & responses ==3~10,
+    Qnum==3 & responses ==4~50,
+    Qnum==3 & responses ==5~250
+  ))%>%
+  mutate(number = case_when(
+    Qnum ==1 ~"q1",
+    Qnum ==2 ~"q2",
+    Qnum ==3 ~"q3"
+  ))%>%
+  select(-Qnum)%>%
+  group_by(Name, category)%>%
+  fill(weight, .direction = "up")%>%
+  spread(number, responses)%>%
+  mutate(weight2=weight*q2)
+
+data1<-data0%>%
+  select(Name, category, q1)%>%
+  rename(partner=Name, partner_resp=q1)
+
+data2<-inner_join(data0, data1, by="category")%>%
+  filter(Name != partner)%>%
+  mutate(weighted_partner_score = if_else(partner_resp > q2, c(q2*weight), c(partner_resp*weight)))%>%
+  mutate(weighted_partner_score = replace_na(weighted_partner_score, 100))%>%
+  mutate(comp_score = (weighted_partner_score/weight2)*100)%>%
+  mutate(comp_score= replace_na(comp_score, 100))%>%
+  select(-c("weight", "q1", "q2","q3", "weight2", "partner_resp", "weighted_partner_score"))
+
+data3<-data2%>% 
+  mutate(joiner=paste(partner, Name, sep = "_"))
+
+data2<-data2%>%
+  mutate(joiner=paste(Name, partner, sep = "_"))
+
+data4<-left_join(data2, data3, by = c("joiner", "category"))%>%
+  rename(A = Name.x, B = Name.y, BonA = comp_score.x, AonB = comp_score.y)%>%
+  select(A, B, category, AonB, BonA)%>%
+  mutate(matchScore = sqrt(AonB * BonA))%>%
+  select(-c("AonB", "BonA"))%>%
+  spread(category, matchScore)%>%
+  mutate(compatibility = nthroot(Appearance * Ethics * Intelligence * Kindness * Wealth, 5))
+
+write.csv(data4, file = "comp.csv")
+```
