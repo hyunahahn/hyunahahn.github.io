@@ -1037,7 +1037,6 @@ data4&lt;-left_join(data2, data3, by = c(&quot;joiner&quot;, &quot;category&quot
   rename(A = Name.x, B = Name.y, BonA = partner_score.x, AonB = partner_score.y, weight.A = weight.x, weight.B = weight.y)%&gt;%
   select(&quot;A&quot;, &quot;B&quot;, &quot;category&quot;, &quot;AonB&quot;, &quot;BonA&quot;, &quot;weight.A&quot;, &quot;weight.B&quot;)%&gt;%
   mutate(matchScore = ((weight.A*BonA + weight.B*AonB)/(weight.A+weight.B))*100)%&gt;%
-  select(-c(&quot;AonB&quot;, &quot;BonA&quot;))%&gt;%
   select(A, B, category, matchScore)%&gt;%
   spread(category, matchScore)%&gt;%
   mutate(compatibility = nthroot(Appearance * Ethics * Intelligence * Kindness * Wealth, 5))</code></pre>
