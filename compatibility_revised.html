@@ -876,7 +876,7 @@ Back to Table of Contents
 ## 6 Boar  Appearance      1     4     4     2 Dog                3          0.75</code></pre>
 <p>Since we do not need <code>q1, q2, q3, partner_resp</code> any more, let’s just get rid of them.</p>
 <pre class="r"><code>data2&lt;-data2%&gt;%
-  select(-c(&quot;q1&quot;, &quot;q2&quot;,&quot;q3&quot;, &quot;partner_resp&quot;))</code></pre>
+  select(-c(q1, q2, q3, partner_resp))</code></pre>
 <pre class="r"><code>head(data2)</code></pre>
 <pre><code>## # A tibble: 6 x 5
 ## # Groups:   Name, category [1]
@@ -921,7 +921,7 @@ data4&lt;-left_join(data2, data3, by = c(&quot;joiner&quot;, &quot;category&quot
 ## 6 Boar  Appearan~        1 Dog        0.75 Boar_~ Dog         50 Boar        0.8</code></pre>
 <p>Now, let’s leave in necessary columns only.</p>
 <pre class="r"><code>data4&lt;-data4%&gt;%
-  select(&quot;A&quot;, &quot;B&quot;, &quot;category&quot;, &quot;AonB&quot;, &quot;BonA&quot;, &quot;weight.A&quot;, &quot;weight.B&quot;)</code></pre>
+  select(A, B, category, AonB, BonA, weight.A, weight.B)</code></pre>
 <pre class="r"><code>head(data4)</code></pre>
 <pre><code>## # A tibble: 6 x 7
 ## # Groups:   category [1]
@@ -1025,7 +1025,7 @@ data1&lt;-data0%&gt;%
 data2&lt;-inner_join(data0, data1, by=&quot;category&quot;)%&gt;%
   filter(Name != partner)%&gt;%
   mutate(partner_score = if_else(partner_resp &gt; q2, c(1), c(partner_resp/q2)))%&gt;%
-  select(-c(&quot;q1&quot;, &quot;q2&quot;,&quot;q3&quot;, &quot;partner_resp&quot;))
+  select(-c(q1, q2, q3, partner_resp))
 
 data3&lt;-data2%&gt;% 
   mutate(joiner=paste(partner, Name, sep = &quot;_&quot;))
@@ -1035,7 +1035,7 @@ data2&lt;-data2%&gt;%
 
 data4&lt;-left_join(data2, data3, by = c(&quot;joiner&quot;, &quot;category&quot;))%&gt;%
   rename(A = Name.x, B = Name.y, BonA = partner_score.x, AonB = partner_score.y, weight.A = weight.x, weight.B = weight.y)%&gt;%
-  select(&quot;A&quot;, &quot;B&quot;, &quot;category&quot;, &quot;AonB&quot;, &quot;BonA&quot;, &quot;weight.A&quot;, &quot;weight.B&quot;)%&gt;%
+  select(A, B, category, AonB, BonA, weight.A, weight.B)%&gt;%
   mutate(matchScore = ((weight.A*BonA + weight.B*AonB)/(weight.A+weight.B))*100)%&gt;%
   select(A, B, category, matchScore)%&gt;%
   spread(category, matchScore)%&gt;%
