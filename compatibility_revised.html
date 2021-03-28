@@ -860,7 +860,7 @@ Back to Table of Contents
 </div>
 <div id="creating-a-new-column-using-if_else" class="section level2">
 <h2><span class="header-section-number">3.7</span> Creating a new column using <code>if_else()</code></h2>
-<p>Now, we need to calculate how each partner’s response measures in each respondent’s scale. Boar places the weight of 4 on <code>Appearance</code>, and all potential partners responded that they were quite good-looking (4) or lower. What if someone said they were extremely good-looking (5), should we give more than 100% to the person? Maybe just 100% will make better sense. To do that, if a partner’s response is higher than a respondent’s wish for partner’s trait (<code>q2</code>), we can just give 1 for the partner’s score. If the partner’s response is smaller than the respondent’s wish, then, we should divide the partner’s response (<code>partner_resp</code>) by the respondent’s original preference for a partner’s trait (<code>q2</code>). And that calculation can be done through <code>if_else()</code> within <code>mutate()</code>. <code>if_else()</code> takes three arguments, a condition, a value when the condition is met, and a value when the condition is not met. So, the code below says that <code>partner_score</code> should be 1 if <code>partner_resp</code> is greater than <code>q2</code>; otherweise, it should be <code>partner_resp/q2</code>.</p>
+<p>Now, we need to calculate how each partner’s response measures in each respondent’s scale. Boar wants his partner to be quite good-looking (4 on <code>q2</code> of <code>Appearance</code>), and all potential partners responded that they were quite good-looking (4) or lower. What if someone said they were extremely good-looking (5), should we give more than 100% to the person? Maybe just 100% will make better sense. To do that, if a partner’s response is higher than a respondent’s wish for partner’s trait (<code>q2</code>), we can just give 1 for the partner’s score. If the partner’s response is equal to or smaller than the respondent’s wish, then, we should divide the partner’s response (<code>partner_resp</code>) by the respondent’s original preference for a partner’s trait (<code>q2</code>). And that calculation can be done through <code>if_else()</code> within <code>mutate()</code>. <code>if_else()</code> takes three arguments, a condition, a value when the condition is met, and a value when the condition is not met. So, the code below says that <code>partner_score</code> should be 1 if <code>partner_resp</code> is greater than <code>q2</code>; otherwise, it should be <code>partner_resp/q2</code>.</p>
 <pre class="r"><code>data2&lt;-data2%&gt;%
   mutate(partner_score = if_else(partner_resp &gt; q2, c(1), c(partner_resp/q2)))</code></pre>
 <pre class="r"><code>head(data2)</code></pre>
@@ -894,10 +894,45 @@ Back to Table of Contents
 <pre class="r"><code>data3&lt;-data2%&gt;% 
   mutate(joiner=paste(partner, Name, sep = &quot;_&quot;))
 
-data2&lt;-data2%&gt;%
+head(data3)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+## # Groups:   Name, category [1]
+##   Name  category   weight partner partner_score joiner   
+##   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;    
+## 1 Boar  Appearance      1 Buck             0.5  Buck_Boar
+## 2 Boar  Appearance      1 Bull             1    Bull_Boar
+## 3 Boar  Appearance      1 Cob              0.75 Cob_Boar 
+## 4 Boar  Appearance      1 Cow              0.75 Cow_Boar 
+## 5 Boar  Appearance      1 Doe              0.75 Doe_Boar 
+## 6 Boar  Appearance      1 Dog              0.75 Dog_Boar</code></pre>
+<pre class="r"><code>data2&lt;-data2%&gt;%
   mutate(joiner=paste(Name, partner, sep = &quot;_&quot;))
 
-data4&lt;-left_join(data2, data3, by = c(&quot;joiner&quot;, &quot;category&quot;))</code></pre>
+head(data2)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+## # Groups:   Name, category [1]
+##   Name  category   weight partner partner_score joiner   
+##   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;    
+## 1 Boar  Appearance      1 Buck             0.5  Boar_Buck
+## 2 Boar  Appearance      1 Bull             1    Boar_Bull
+## 3 Boar  Appearance      1 Cob              0.75 Boar_Cob 
+## 4 Boar  Appearance      1 Cow              0.75 Boar_Cow 
+## 5 Boar  Appearance      1 Doe              0.75 Boar_Doe 
+## 6 Boar  Appearance      1 Dog              0.75 Boar_Dog</code></pre>
+<pre class="r"><code>data4&lt;-left_join(data2, data3, by = c(&quot;joiner&quot;, &quot;category&quot;))
+
+head(data4)</code></pre>
+<pre><code>## # A tibble: 6 x 10
+## # Groups:   category [1]
+##   Name.x category weight.x partner.x partner_score.x joiner Name.y weight.y
+##   &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
+## 1 Boar   Appeara~        1 Buck                 0.5  Boar_~ Buck         50
+## 2 Boar   Appeara~        1 Bull                 1    Boar_~ Bull         50
+## 3 Boar   Appeara~        1 Cob                  0.75 Boar_~ Cob          50
+## 4 Boar   Appeara~        1 Cow                  0.75 Boar_~ Cow          50
+## 5 Boar   Appeara~        1 Doe                  0.75 Boar_~ Doe          10
+## 6 Boar   Appeara~        1 Dog                  0.75 Boar_~ Dog          50
+## # ... with 2 more variables: partner.y &lt;chr&gt;, partner_score.y &lt;dbl&gt;</code></pre>
 <p>Now the newly joined data4 has too many columns that it will not be displayed properly, let’s just check the names of the columns in the new data set.</p>
 <pre class="r"><code>colnames(data4)</code></pre>
 <pre><code>##  [1] &quot;Name.x&quot;          &quot;category&quot;        &quot;weight.x&quot;        &quot;partner.x&quot;      
