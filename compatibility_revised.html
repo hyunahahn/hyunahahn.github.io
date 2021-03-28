@@ -595,7 +595,7 @@ Back to Table of Contents
 <p>The first thing you now need to do is to turn the wide data above into a long form. In this case, we can use the <code>gather()</code> function from <code>dplyr</code>.</p>
 <pre class="r"><code>data0&lt;-raw.data%&gt;%
   gather(questions, responses, 2:16)</code></pre>
-<p>You have taken a peak at <code>raw.data</code> earlier, the code above says that you are creating a new data frame named <code>data0</code> out of <code>raw.data</code>. The <code>gather()</code> function takes column headings from the second column to the 16th column for <code>questions</code> and responses in each cell as <code>responses</code>. In the wide format, each person was listed only in one row with his/her 15 responses next to the name. In the long data format, each person is repeated in 15 different rows and will be accompanied by a question and a response. The first 15 rows of the long data looks like this.</p>
+<p>You have taken a peek at <code>raw.data</code> earlier, the code above says that you are creating a new data frame named <code>data0</code> out of <code>raw.data</code>. The <code>gather()</code> function takes column headings from the second column to the 16th column for <code>questions</code> and responses in each cell as <code>responses</code>. In the wide format, each person was listed only in one row with his/her 15 responses next to the name. In the long data format, each person is repeated in 15 different rows and will be accompanied by a question and a response. The first 15 rows of the long data looks like this.</p>
 <pre class="r"><code>head(data0%&gt;%arrange(Name), n = 15L)</code></pre>
 <pre><code>##    Name      questions responses
 ## 1  Boar   Appearance_1         4
