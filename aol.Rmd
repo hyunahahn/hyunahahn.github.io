@@ -58,7 +58,7 @@ data1<-data0%>%
 data2<-inner_join(data0, data1, by="category")%>%
   filter(Name != partner)%>%
   mutate(partner_score = if_else(partner_resp > q2, c(1), c(partner_resp/q2)))%>%
-  select(-c("q1", "q2","q3", "partner_resp"))
+  select(-c(q1, q2, q3, partner_resp))
 
 data3<-data2%>% 
   mutate(joiner=paste(partner, Name, sep = "_"))
@@ -68,7 +68,7 @@ data2<-data2%>%
 
 data4<-left_join(data2, data3, by = c("joiner", "category"))%>%
   rename(A = Name.x, B = Name.y, BonA = partner_score.x, AonB = partner_score.y, weight.A = weight.x, weight.B = weight.y)%>%
-  select("A", "B", "category", "AonB", "BonA", "weight.A", "weight.B")%>%
+  select(A, B, category, AonB, BonA, weight.A, weight.B)%>%
   mutate(matchScore = ((weight.A*BonA + weight.B*AonB)/(weight.A+weight.B))*100)%>%
   select(A, B, category, matchScore)%>%
   spread(category, matchScore)%>%
