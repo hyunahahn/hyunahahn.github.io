@@ -619,7 +619,7 @@ Back to Table of Contents
 </div>
 <div id="seperating-a-column-using-separate" class="section level2">
 <h2><span class="header-section-number">3.2</span> Seperating a column using <code>separate()</code></h2>
-<p>Now, you understand what a long form of data means. The next step is to separate keywords and numbers in the second column such as Intelligence_1 and Ethics_3. The keywords indicate the traits we are interested in, and the numbers indicate 1: Your trait, 2: Your preference for your partner’s trait. and 3: The importance of a trait. I have intentionally used such column names for easy separation of the keywords and the numbers. The code below includes the part where wide data was shaped long and moves onto the next line that separates the keywords and numbers. <code>separate(questions, c(&quot;category&quot;, &quot;Qnum&quot;))</code> means that the column <code>questions</code> will be separated into two columns <code>category</code> and <code>Qnum</code>. The keywords will be placed in the category column and the suffixes will be placed in the ‘Qnum’ column.</p>
+<p>Now, you understand what a long form of data means. The next step is to separate keywords and numbers in the second column such as Intelligence_1 and Ethics_3. The keywords indicate the traits we are interested in, and the numbers indicate 1: Your trait, 2: Your preference for your partner’s trait. and 3: The importance of a trait. I have intentionally used such column names for easy separation of the keywords and the numbers. <code>separate(questions, c(&quot;category&quot;, &quot;Qnum&quot;))</code> means that the column <code>questions</code> will be separated into two columns <code>category</code> and <code>Qnum</code>. The keywords will be placed in the <code>category</code> column and the suffixes will be placed in the <code>Qnum</code> column.</p>
 <pre class="r"><code>data0&lt;-data0%&gt;%
   separate(questions, c(&quot;category&quot;, &quot;Qnum&quot;))</code></pre>
 <p>The <code>%&gt;%</code> symbol is called a ‘pipe,’ and it links one code to the next. This way, you don’t have to create a new data frame every time you make a change in your data frame. Now, let’s take a look at how the column is now separated.</p>
@@ -640,7 +640,7 @@ Back to Table of Contents
 ## 13 Boar       Ethics    1         3
 ## 14 Boar       Ethics    2         3
 ## 15 Boar       Ethics    3         4</code></pre>
-<p>The <code>%&gt;% arrange(Name)</code> command is added to arrange the data file by respondents’ names. If you’d like to see what happens without it, you can simply try <code>head(data0, n =15L)</code> or just <code>head(data0)</code>. What you see here now is that Boar thinks he is quite good looking since he gave 4 to the first question of Appearance, and he also wants his partner to be just as good looking, but he says appearance is not that important as his score for the third question of appearance is only 2. So, that’s how you read this data set.</p>
+<p>The <code>%&gt;% arrange(Name)</code> command is added to arrange the data file by respondents’ names. If you’d like to see what happens without it, you can simply try <code>head(data0, n =15L)</code> or just <code>head(data0)</code>. What you see here now is that Boar thinks he is quite good looking since he gave 4 to the first question of <code>Appearance</code>, and he also wants his partner to be just as good looking, but he says <code>Appearance</code> is not that important as his score for the third question of <code>Appearance</code> is only 2. So, that’s how you read this data set.</p>
 <button onclick="topFunction()" id="myBtn" title="Go to top">
 Back to Table of Contents
 </button>
@@ -675,7 +675,7 @@ Back to Table of Contents
 ## 14 Boar       Ethics    2         3     NA
 ## 15 Boar       Ethics    3         4     50</code></pre>
 <p>For every row that has a question about the importance of a trait and a response to it, the weight of the trait in the exponential scale is listed in the <code>weight</code> column.</p>
-<p>The next step is to turn the continuous values in the <code>Qnum</code> column into categorical values because we do not want R to process the numbers in the Qnum column as ordinal or interval values. We can again use the <code>mutate()</code> and <code>case_when()</code> functions to do that. Also, adding in <code>select(-Qnum)</code> at the end of the codes will delete the now unwanted, redundant column (<code>Qnum</code>).</p>
+<p>The next step is to turn the continuous values in the <code>Qnum</code> column into categorical values because we do not want R to process the numbers in the <code>Qnum</code> column as ordinal or interval values. We can again use the <code>mutate()</code> and <code>case_when()</code> functions to do that. Also, adding in <code>select(-Qnum)</code> at the end of the codes will delete the now unwanted, redundant column (<code>Qnum</code>).</p>
 <pre class="r"><code>data0&lt;-data0%&gt;%
   mutate(number = case_when(
     Qnum ==1 ~&quot;q1&quot;,
@@ -760,7 +760,7 @@ Back to Table of Contents
 <pre class="r"><code>data1&lt;-data0%&gt;%
   select(Name, category, q1)%&gt;%
   rename(partner=Name, partner_resp=q1)</code></pre>
-<p>You create a new data frame called data1 out of data0 and select only three columns: <code>Name, category, q1</code>. Then, rename the <code>Name</code> column <code>partner</code> and <code>q1</code> <code>partner_resp</code>. Everyone is a potential partner to everyone anyway! And it looks like this.</p>
+<p>You create a new data frame called <code>data1</code> out of <code>data0</code> and select only three columns: <code>Name, category, q1</code>. Then, rename the <code>Name</code> column <code>partner</code> and <code>q1</code> <code>partner_resp</code>. Everyone is a potential partner to everyone anyway! And it looks like this.</p>
 <pre class="r"><code>head(data1 %&gt;% arrange(partner), n=15L)</code></pre>
 <pre><code>## # A tibble: 15 x 3
 ## # Groups:   partner, category [15]
@@ -905,7 +905,7 @@ data4&lt;-left_join(data2, data3, by = c(&quot;joiner&quot;, &quot;category&quot
 ##  [9] &quot;partner.y&quot;       &quot;partner_score.y&quot;</code></pre>
 <pre class="r"><code>nrow(data4)</code></pre>
 <pre><code>## [1] 1710</code></pre>
-<p>What I can tell you here is that <code>Name.x</code> is the same as <code>partner.y</code> and that <code>partner.x</code> is the same as <code>Name.y</code>. What we can do is set <code>Name.x</code> to be A and <code>Name.y</code> to be B. Then, <code>partner_score.x</code> will be B’s score on A’s scale, and <code>partner_score.y</code> will be A’s score on B’s scale. Also, <code>weight.x</code> means the weight placed on a trait by a respondent, which we now call A, and <code>weight.y</code> indicates the weight placed on a trait by a partner, which we now call B. Let’s rename them to be <code>weight.A</code> and <code>weight.B</code>, respectively.</p>
+<p>What I can tell you here is that <code>Name.x</code> is the same as <code>partner.y</code> and that <code>partner.x</code> is the same as <code>Name.y</code>. What we can do is set <code>Name.x</code> to be A and <code>Name.y</code> to be B. Then, <code>partner_score.x</code> will be B’s score on A’s scale (<code>BonA</code>), and <code>partner_score.y</code> will be A’s score on B’s scale (<code>AonB</code>). Also, <code>weight.x</code> means the weight placed on a trait by a respondent, which we now call A, and <code>weight.y</code> indicates the weight placed on a trait by a partner, which we now call B. Let’s rename them to be <code>weight.A</code> and <code>weight.B</code>, respectively.</p>
 <pre class="r"><code>data4&lt;-data4%&gt;%
   rename(A = Name.x, B = Name.y, BonA = partner_score.x, AonB = partner_score.y, weight.A = weight.x, weight.B = weight.y)</code></pre>
 <pre class="r"><code>head(data4)</code></pre>
@@ -933,7 +933,7 @@ data4&lt;-left_join(data2, data3, by = c(&quot;joiner&quot;, &quot;category&quot
 ## 4 Boar  Cow   Appearance   0.8  0.75        1       50
 ## 5 Boar  Doe   Appearance   1    0.75        1       10
 ## 6 Boar  Dog   Appearance   0.8  0.75        1       50</code></pre>
-<p>Let’s now calculate how two people are doing on each other’s scale.</p>
+<p>Let’s now calculate each pair’s match score on each trait.</p>
 <pre class="r"><code>data4&lt;-data4%&gt;%
   mutate(matchScore = ((weight.A*BonA + weight.B*AonB)/(weight.A+weight.B))*100)</code></pre>
 <p>Also, if you’d like to see how the scores are distributed, a histogram (<code>hist()</code>) will help. Using <code>ggplot2::</code> for a neat and pretty plot will be discussed in another post in the future.</p>
@@ -956,7 +956,7 @@ nrow(data4)</code></pre>
 ## 4 Boar  Cow         79.9   95.8          100     83.3  100  
 ## 5 Boar  Doe         97.7   95.8          100    100     95.8
 ## 6 Boar  Dog         79.9   80            100     83.3  100</code></pre>
-<p>You can see that each pair’s match scores for the five different trait categories are next to each other in one line. We now need to get the 5th root of the five values.</p>
+<p>You can see that each pair’s match scores for the five different trait categories are next to each other in one line. We now need to get the 5th root of the product of the five values.</p>
 <pre class="r"><code>data4&lt;-data4%&gt;%
   mutate(compatibility = nthroot(Appearance * Ethics * Intelligence * Kindness * Wealth, 5))</code></pre>
 <pre class="r"><code>head(data4)</code></pre>
