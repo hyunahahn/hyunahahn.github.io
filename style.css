@@ -13,7 +13,7 @@ body {
 /* Style the top navigation bar */
 .topnav {
   overflow: hidden;
-  background-color: #31a354;
+  background-color: #283747;
 }
 
 /* Style the topnav links */
@@ -41,7 +41,7 @@ body {
 
 /* Style the footer */
 .footer {
-  background-color: #bae4b3;
+  background-color: #FFC300;
   padding: 10px;
 }
 </style>
