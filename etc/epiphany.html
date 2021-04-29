@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Hyunah Ahn | etc</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../style.css">
+<style>
+#more {display: none;}
+</style>
+</head>
+<body>
 
+<div class="topnav">
+  <a href="../index.html">Home</a>
+  <a href="../research.html">Research</a>
+  <a href="../teaching.html">Teaching</a>
+  <a href="../R.html">R</a>
+  <a href="../cv.html">CV</a>
+  <a href="../etc.html">etc.</a>
+</div>
+
+<div class="content">
+  <h2>epiphanies</h2>
+  <p>I'm not so sure if it is a good idea to start a whole new thread labled 'epiphanies' when there's no guarantee that I can make a 'list' where n > 1. But I sometimes come up with some brilliant ideas. So, I'll start the list with my all-time favorite one and gradually add more stuff later.</p>
+	<ol><li>On folding laundry</li>
+	<p> How do you feel about doing laundry? If you can rate your liking/disliking it on a Likert scale of 5, what would it be? In my case, <span id="dots">...</span><span id="more"> doing laundry itself depends on whether or not I have to run into others when I go back and forth between my desk (or any other spot I'm occupying while I'm doing laundry) and the washer. <br>
+<br>		
+		
+		</span>
+<button onclick="myFunction()" id="myBtn">Read more</button>
+<script>
+function myFunction() {
+  var dots = document.getElementById("dots");
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("myBtn");
+
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "Read more";
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "Read less";
+    moreText.style.display = "inline";
+  }
+}
+</script>
+  </ol>
+         </p>
+</div>
+
+<div class="footer">
+  <p>Last Updated: 15 Apr 2021</p>
+</div>
+
+</body>
+</html>
