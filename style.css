@@ -44,4 +44,8 @@ body {
   background-color: #AEB6BF;
   padding: 10px;
 }
+
+.more{
+   display: none;
+}
 </style>
