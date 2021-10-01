@@ -10,10 +10,6 @@ body {
   color:#000000;
 }
 
-div {
-  max-width = 500px;
-}
-
 /* Style the top navigation bar */
 .topnav {
   overflow: hidden;
