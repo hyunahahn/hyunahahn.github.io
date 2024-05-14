@@ -13,7 +13,7 @@ body {
 /* Style the top navigation bar */
 .topnav {
   overflow: hidden;
-  background-color: #283747;
+  background-color: #30415D;
   max-width: 100%;
   margin: 0 auto;
   display: flex; /* use flexbox */
@@ -23,7 +23,7 @@ body {
 /* Style the topnav links */
 .topnav a {
   display: inline-block;
-  color: #FDFEFE;
+  color: #8EAEBD;
   text-align: center;
   padding: 20px 12px;
   text-decoration: none;
@@ -31,8 +31,8 @@ body {
 
 /* Change color on hover */
 .topnav a:hover {
-  background-color: #AEB6BF;
-  color: black;
+  background-color: #CF6766;
+  color: #031424;
 }
 
 /* Style the content */
@@ -41,7 +41,8 @@ body {
   min-height: 300px;
   margin: 0 auto; /* Centering the container */
   padding: 0 20px; /* Adding some padding to the sides */
-  background-color: #FFFFFF;
+  background-color: none;
+  color: #031424;
 }
 
 /* Ensure responsive images fill the width on smaller devices */
@@ -60,7 +61,8 @@ body {
 
 /* Style the footer */
 .footer {
-  background-color: #AEB6BF;
+  background-color: #30415D;
+  color: #8EAEBD;
   padding: 10px;
   max-width: 100%;
   margin: 0 auto; /* Center the footer */
