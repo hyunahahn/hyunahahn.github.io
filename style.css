@@ -44,6 +44,20 @@ body {
   background-color: #FFFFFF;
 }
 
+/* Ensure responsive images fill the width on smaller devices */
+.responsive-image {
+  max-width: 100%; /* Set maximum width to 100% */
+  height: auto; /* Ensure aspect ratio is maintained */
+}
+
+/* Adjust image size for desktop and tablet screens */
+@media (min-width: 768px) {
+  .responsive-image {
+    max-width: none; /* Remove maximum width */
+    width: auto; /* Reset width to auto */
+  }
+}
+
 /* Style the footer */
 .footer {
   background-color: #AEB6BF;
