@@ -103,5 +103,22 @@
   <p>Last Updated: 14 May 2024</p>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var headers = document.querySelectorAll('.toggle-header');
+        
+        headers.forEach(function(header) {
+            header.addEventListener('click', function() {
+                var nextSibling = header.nextElementSibling;
+                while (nextSibling && !nextSibling.classList.contains('toggle-header')) {
+                    if (nextSibling.classList.contains('toggle-content')) {
+                        nextSibling.style.display = (nextSibling.style.display === 'none' || nextSibling.style.display === '') ? 'block' : 'none';
+                    }
+                    nextSibling = nextSibling.nextElementSibling;
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
