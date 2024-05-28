@@ -37,7 +37,7 @@ body {
 
 /* Style the content */
 .content {
-  max-width: 1200px; /* Adjust this value as per your preference */
+  max-width: 1000px; /* Adjust this value as per your preference */
   min-height: 300px;
   margin: 0 auto; /* Centering the container */
   padding: 0 20px; /* Adding some padding to the sides */
