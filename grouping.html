@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Group Assignment</title>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+    <style>
+        #adminPanel, #studentPanel { display: none; }
+    </style>
+</head>
+<body>
+    <div id="adminPanel">
+        <h1>Admin: Set Group Configuration</h1>
+        <label>Number of Groups: </label>
+        <input type="number" id="numGroups" placeholder="Enter number of groups" min="1">
+        <label>Members Per Group: </label>
+        <input type="number" id="membersPerGroup" placeholder="Enter members per group" min="1">
+        <button id="saveConfig">Save Group Configuration</button>
+    </div>
+    
+    <div id="studentPanel">
+        <h1>Student Group Assignment</h1>
+        <input type="text" id="studentName" placeholder="Enter your name">
+        <button id="joinGroup">Join</button>
+        <div id="output"></div>
+        <h2>Current Groups</h2>
+        <button id="refreshGroups">Refresh Groups</button>
+        <div id="groups"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (typeof firebase === 'undefined') {
+                console.error("Firebase SDK failed to load.");
+                alert("Error loading Firebase. Please check your internet connection.");
+                return;
+            }
+
+            const firebaseConfig = {
+                apiKey: "YOUR_API_KEY",
+                authDomain: "YOUR_AUTH_DOMAIN",
+                projectId: "YOUR_PROJECT_ID",
+                storageBucket: "YOUR_STORAGE_BUCKET",
+                messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+                appId: "YOUR_APP_ID"
+            };
+            
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+
+            async function checkConfig() {
+                try {
+                    const settingsDoc = await db.collection("settings").doc("groupConfig").get();
+                    if (settingsDoc.exists) {
+                        document.getElementById("adminPanel").style.display = "none";
+                        document.getElementById("studentPanel").style.display = "block";
+                    } else {
+                        document.getElementById("adminPanel").style.display = "block";
+                    }
+                } catch (error) {
+                    console.error("Error fetching config:", error);
+                }
+            }
+
+            document.getElementById("saveConfig").addEventListener("click", async function () {
+                try {
+                    let numGroups = document.getElementById("numGroups").value;
+                    let membersPerGroup = document.getElementById("membersPerGroup").value;
+                    if (!numGroups || !membersPerGroup || numGroups <= 0 || membersPerGroup <= 0) {
+                        alert("Please enter valid numbers for groups and members per group.");
+                        return;
+                    }
+                    await db.collection("settings").doc("groupConfig").set({
+                        numGroups: parseInt(numGroups),
+                        membersPerGroup: parseInt(membersPerGroup)
+                    });
+                    document.getElementById("adminPanel").style.display = "none";
+                    document.getElementById("studentPanel").style.display = "block";
+                } catch (error) {
+                    console.error("Error saving config:", error);
+                }
+            });
+
+            document.getElementById("joinGroup").addEventListener("click", async function () {
+                try {
+                    const name = document.getElementById("studentName").value.trim();
+                    if (!name) {
+                        alert("Please enter your name");
+                        return;
+                    }
+                    const settingsDoc = await db.collection("settings").doc("groupConfig").get();
+                    if (!settingsDoc.exists) {
+                        alert("Groups have not been configured yet. Please wait for the administrator.");
+                        return;
+                    }
+                    const { numGroups, membersPerGroup } = settingsDoc.data();
+                    const studentsSnapshot = await db.collection("students").get();
+                    let students = studentsSnapshot.docs.map(doc => doc.data());
+                    let groupCounts = Array(numGroups).fill(0);
+                    students.forEach(student => groupCounts[student.groupNumber - 1]++);
+                    let groupNumber = groupCounts.indexOf(Math.min(...groupCounts)) + 1;
+                    if (groupCounts[groupNumber - 1] >= membersPerGroup) {
+                        alert("All groups are full! Please contact the administrator.");
+                        return;
+                    }
+                    await db.collection("students").add({ name, groupNumber });
+                    document.getElementById("output").innerHTML = `<h3>You are in Group ${groupNumber}</h3>`;
+                } catch (error) {
+                    console.error("Error joining group:", error);
+                }
+            });
+
+            document.getElementById("refreshGroups").addEventListener("click", async function () {
+                try {
+                    const groupsDiv = document.getElementById("groups");
+                    groupsDiv.innerHTML = "";
+                    const studentsSnapshot = await db.collection("students").get();
+                    let groups = {};
+                    studentsSnapshot.forEach(doc => {
+                        let student = doc.data();
+                        if (!groups[student.groupNumber]) groups[student.groupNumber] = [];
+                        groups[student.groupNumber].push(student.name);
+                    });
+                    for (let group in groups) {
+                        groupsDiv.innerHTML += `<h3>Group ${group}</h3><p>${groups[group].join(", ")}</p>`;
+                    }
+                } catch (error) {
+                    console.error("Error loading groups:", error);
+                }
+            });
+
+            checkConfig();
+        });
+    </script>
+</body>
+</html>
