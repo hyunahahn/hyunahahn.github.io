@@ -79,3 +79,22 @@ h4 {
 h4.non-italic {
   font-style: normal;
 }
+
+.answer {
+  display: none;
+  margin-top: 5px;
+}
+
+.answer.open {
+  display: block;
+}
+
+.question {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 1em;
+  font-family: inherit;
+  padding: 0;
+}
