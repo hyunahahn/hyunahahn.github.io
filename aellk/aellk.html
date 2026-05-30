@@ -342,10 +342,47 @@ Hyunah Ahn
 <li><p>명준이가 준성이에게 파티 초대장을 보냈다.</p>
 <ul>
 <li>준성이는 일이 있어서 파티에 가지 못했다: patient</li>
+<li>초대장은 간결했다. 희고 질 좋은 종이에…: theme</li>
 </ul></li>
 <li><p>명준이가 준성이에게 파티 초대장을 받았다.</p>
 <ul>
 <li>명준이는 파티에 가고 싶어 흥분된 마음을 감출 수가 없다: patient</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="inaccurate-data">Inaccurate Data</h3>
+<ul>
+<li>OTHERS
+<ul>
+<li>Thematic role reversion
+<ul>
+<li>강민이가 호영이한테 맞았다. 그래서, 호영이가 화가 났다.</li>
+<li>동욱이가 준영이에게 잡혔다. 준영이가 도둑이고, 동욱이가 경찰이다.</li>
+</ul></li>
+<li>Unclear/ambiguous continuation
+<ul>
+<li>동욱이가 준영이를 잡았다. 나도 알아. 그런 친구가 옆에 있는데 얼마나 다행이니?</li>
+<li>명준이가 준성이에게 파티 초대장을 보냈다. 기쁘다.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="data-coding">Data Coding</h3>
+<ul>
+<li>Total number of responses: 25 participants x 24 items = 600 responses
+<ul>
+<li>3 no responses</li>
+<li>122 “other” responses removed: inaccurate + unclear (20%)</li>
+<li>Number of responses analyzed: 474</li>
+</ul></li>
+<li>Data coding
+<ul>
+<li>1: patient</li>
+<li>0: agent, both (proto-agent + proto-patient), theme (psych-verbs)</li>
 </ul></li>
 </ul>
 </section>
@@ -366,29 +403,6 @@ Hyunah Ahn
 </ul></li>
 <li><p>R version 4.6.0 (2026-04-24)</p></li>
 <li><p>lmerTest</p></li>
-</ul>
-</section>
-<section class="slide level2">
-
-<h3 id="inaccurate-data">Inaccurate Data</h3>
-<ul>
-<li>OTHERS
-<ul>
-<li>Thematic role reversion</li>
-<li>Unclear/ambiguous continuation</li>
-</ul></li>
-<li>Total number of responses: 25 participants x 24 items = 600 responses
-<ul>
-<li>2 no responses</li>
-<li>122 “other” responses removed: inaccurate + unclear</li>
-<li>1 missing value</li>
-<li>Number of responses analyzed: 474</li>
-</ul></li>
-<li>Data coding
-<ul>
-<li>1: patient</li>
-<li>0: agent, both (proto-agent + proto-patient), theme (psych-verbs)</li>
-</ul></li>
 </ul>
 </section></section>
 <section>
@@ -430,10 +444,34 @@ Hyunah Ahn
 </tr></tbody></table>
 
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-        0         1 
-0.3621053 0.6378947 </code></pre>
+</div>
+<div class="spacer">
+
+</div>
+<h4 id="responses-starting-with-proto-agent-vs.-proto-patient">Responses starting with Proto-Agent vs.&nbsp;Proto-Patient</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Responses</th>
+<th style="text-align: right;">Count</th>
+<th style="text-align: right;">Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Agent-related</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">36.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Patient-related</td>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">63.8</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
@@ -441,83 +479,148 @@ Hyunah Ahn
 
 <h3 id="more-patient-related-responses-for-stimulus-first-psych-verbs">More Patient-related Responses for Stimulus-first Psych-verbs</h3>
 
-<img data-src="aellk_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<img data-src="aellk_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="interaction-between-condition-and-verb-type">Interaction between Condition and Verb Type</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">z</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">0.863</td>
+<td style="text-align: right;">0.324</td>
+<td style="text-align: right;">2.666</td>
+<td style="text-align: right;">0.008</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Condition (Agent-first)</td>
+<td style="text-align: right;">0.107</td>
+<td style="text-align: right;">0.371</td>
+<td style="text-align: right;">0.288</td>
+<td style="text-align: right;">0.773</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Psych Verbs</td>
+<td style="text-align: right;">-1.534</td>
+<td style="text-align: right;">0.393</td>
+<td style="text-align: right;">-3.902</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dative Verbs</td>
+<td style="text-align: right;">0.028</td>
+<td style="text-align: right;">0.404</td>
+<td style="text-align: right;">0.069</td>
+<td style="text-align: right;">0.945</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Condition × Psych</td>
+<td style="text-align: right;">1.318</td>
+<td style="text-align: right;">0.510</td>
+<td style="text-align: right;">2.582</td>
+<td style="text-align: right;">0.010</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Condition × Dative</td>
+<td style="text-align: right;">0.224</td>
+<td style="text-align: right;">0.525</td>
+<td style="text-align: right;">0.426</td>
+<td style="text-align: right;">0.670</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>Proto-patient related responses decrease with psych verbs.</li>
+<li>The psych-verb related decrease is modulated when the stimulus starts with a proto-agent.</li>
+<li>More patient responses with 성호가 민욱이를 귀찮게 한다 than 귀찮아 한다.</li>
+</ul>
+</section>
 <section class="slide level2">
 
 <h3 id="inaccuracy-rates-by-verb-type-and-condition">Inaccuracy Rates by Verb Type and Condition</h3>
 
-<img data-src="aellk_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<img data-src="aellk_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section class="slide level2">
 
 <h3 id="more-errors-when-stimuli-present-patients-first">More Errors when Stimuli Present Patients First</h3>
 <div class="cell">
 <div class="cell-output-display">
-<table style="border-collapse:collapse; border:none;">
-<tbody><tr>
-<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
-<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">confusion</th>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">z</th>
+<th style="text-align: right;">p</th>
 </tr>
-<tr>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Odds Ratios</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">-1.689</td>
+<td style="text-align: right;">0.471</td>
+<td style="text-align: right;">-3.589</td>
+<td style="text-align: right;">0.000</td>
 </tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.18</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.07&nbsp;–&nbsp;0.46</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<tr class="even">
+<td style="text-align: left;">Condition (Agent-first)</td>
+<td style="text-align: right;">-3.168</td>
+<td style="text-align: right;">0.813</td>
+<td style="text-align: right;">-3.897</td>
+<td style="text-align: right;">0.000</td>
 </tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">condition [2]</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.04</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.01&nbsp;–&nbsp;0.21</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<tr class="odd">
+<td style="text-align: left;">Psych Verbs</td>
+<td style="text-align: right;">-3.148</td>
+<td style="text-align: right;">0.860</td>
+<td style="text-align: right;">-3.663</td>
+<td style="text-align: right;">0.000</td>
 </tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">type [sees]</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.04</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.01&nbsp;–&nbsp;0.23</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<tr class="even">
+<td style="text-align: left;">Dative Verbs</td>
+<td style="text-align: right;">-0.211</td>
+<td style="text-align: right;">0.483</td>
+<td style="text-align: right;">-0.436</td>
+<td style="text-align: right;">0.663</td>
 </tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">type [sggs]</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.81</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.31&nbsp;–&nbsp;2.09</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.663</td>
+<tr class="odd">
+<td style="text-align: left;">Condition × Psych</td>
+<td style="text-align: right;">4.798</td>
+<td style="text-align: right;">1.187</td>
+<td style="text-align: right;">4.043</td>
+<td style="text-align: right;">0.000</td>
 </tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">condition [2] × type<br>[sees]</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">121.31</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">11.85&nbsp;–&nbsp;1242.38</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<tr class="even">
+<td style="text-align: left;">Condition × Dative</td>
+<td style="text-align: right;">-0.455</td>
+<td style="text-align: right;">1.322</td>
+<td style="text-align: right;">-0.344</td>
+<td style="text-align: right;">0.731</td>
 </tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">condition [2] × type<br>[sggs]</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.63</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.05&nbsp;–&nbsp;8.47</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.731</td>
-</tr>
-
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>participant</sub></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">25</td>
-
-</tr><tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>item</sub></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">24</td>
-
-</tr></tbody></table>
-
+</tbody>
+</table>
 </div>
 </div>
 <div class="spacer">
 
 </div>
 <ul>
-<li>More inaccurate thmematic role assignments in patient-first</li>
-<li>Insignificant difference in psych-predicates</li>
+<li>More inaccurate thematic role assignments in patient-first items</li>
+<li>Condition effects differ across verb types.</li>
 </ul>
 </section></section>
 <section>
@@ -543,6 +646,21 @@ Hyunah Ahn
 </section>
 <section class="slide level2">
 
+<h3 id="is-topic-shift-predictable">Is Topic Shift Predictable?</h3>
+<p>Ahn (2025)’s speculation:</p>
+<ul>
+<li>Shorter reading times (RTs) when topic shift was expected</li>
+<li>Topic shift cases: agent-first and patient-later</li>
+</ul>
+<p>Current study:</p>
+<ul>
+<li>Discourse continuation favors proto-patients</li>
+<li>The proto-patient bias can indicate topic shift/continuation</li>
+<li>Topic shift is guided by proto-patient bias</li>
+</ul>
+</section>
+<section class="slide level2">
+
 <h3 id="good-enough-processing-in-korean">Good-Enough Processing in Korean?</h3>
 <ul>
 <li>Ferreira and colleagues (Ferreira, 2003; Ferreira et al., 2003; Ferreira et al., 2009; Ferreira &amp; Patson, 2007): Rather than accurately processing thematic roles, world knowledge aligned good enough processing
@@ -559,21 +677,6 @@ Hyunah Ahn
 <li>Jane was praised by Jill.</li>
 <li>With no world knowledge bias, agent-first sentences yielded higher accuracy.</li>
 </ul></li>
-</ul>
-</section>
-<section class="slide level2">
-
-<h3 id="is-topic-shift-predictable">Is Topic Shift Predictable?</h3>
-<p>Ahn (2025)’s speculation:</p>
-<ul>
-<li>Shorter reading times (RTs) when topic shift was expected</li>
-<li>Topic shift cases: agent-first and patient-later</li>
-</ul>
-<p>Current study:</p>
-<ul>
-<li>Discourse continuation favors proto-patients</li>
-<li>The proto-patient bias can indicate topic shift/continuation</li>
-<li>Topic shift is guided by proto-patient bias</li>
 </ul>
 </section></section>
 <section id="references" class="title-slide slide level1 center">
