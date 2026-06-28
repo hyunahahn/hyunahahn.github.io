@@ -1,9 +1,13 @@
 .reveal .title {
   font-size: 1.8em !important;
+  display: inline-block;
+  background: rgba(0,0,0,0.75);
+  padding: 25px;
+  border-radius: 12px;	
 }
 
 .reveal .subtitle {
-  font-size: 0.8em !important;
+  font-size: 1.3em !important;
 }
 
 .reveal h1,
